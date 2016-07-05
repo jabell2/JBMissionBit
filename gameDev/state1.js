@@ -6,9 +6,9 @@ var obstacle;
 var platforms;
 
 var spacekey;
-demo.state0 = function(){};
+demo.state1 = function(){};
 
-demo.state0.prototype = {
+demo.state1.prototype = {
     
     preload: function(){
        game.load.spritesheet('square', 'assets/spritesheets/WalkingSquare.png', 120, 155);
@@ -21,8 +21,6 @@ demo.state0.prototype = {
     },
     
     create: function(){
-        
-        game.state.start('menu');
         
         game.world.setBounds(0,0,1265,10)
         
@@ -100,4 +98,3 @@ demo.state0.prototype = {
     
     
 };
-
