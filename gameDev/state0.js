@@ -14,13 +14,16 @@ demo.state0.prototype = {
        game.load.spritesheet('square', 'assets/spritesheets/WalkingSquare.png', 120, 155);
        game.load.spritesheet('ledge', 'assets/spritesheets/ledge.png', 1250, 15);
         
-        game.load.spritesheet('ledge2', 'assets/spritesheets/ledge2.png', 100, 60);
+        game.load.spritesheet('obstacle', 'assets/spritesheets/ledge2.png', 100, 60);
         
         game.load.spritesheet('ledge3', 'assets/spritesheets/ledge3.png', 1250, 10);
         
     },
     
     create: function(){
+        
+        game.world.setBounds(0,0,1265,10)
+        
         game.stage.backgroundColor = '#ffffff';
 //        ledge3 = game.add.sprite(0, 570, 'ledge3');
         
@@ -33,7 +36,7 @@ demo.state0.prototype = {
         
 
         
-        square.body.gravity.y = 200;
+        square.body.gravity.y = 100;
         game.physics.startSystem(Phaser.Physics.ARCADE);
         
 //        game.physics.enable(ledge);
@@ -56,11 +59,12 @@ demo.state0.prototype = {
         var ledge = platforms.create(0, 125, 'ledge');
         ledge.body.immovable = true;
         
-        var ledge2 = platforms.create(400, 520, 'ledge2');
+        var obstacle = platforms.create(400, 520, 'obstacle');
+        obstacle.body.immovable = true;
         
         this.spacekey = game.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR);
            
-   square.animations.add('walk', [0,1,2,3,4]);
+   square.animations.add('walk', [0,1,2,], 3.5);
       
         
         
@@ -71,7 +75,7 @@ demo.state0.prototype = {
         game.physics.arcade.collide(platforms, square);
       
       if(cursors.right.isDown){
-          square.body.velocity.x = 150;
+          square.body.velocity.x = 300;
       }
     else if(this.spacekey.isDown){
             square.body.velocity.y = -200;
@@ -80,6 +84,9 @@ demo.state0.prototype = {
             square.body.velocity.x = 0;
             square.animations.stop();
             square.frame = 0;
+        }
+        if(cursors.up.isDown){
+            square.body.velocity.y = -550;
         }
        
     }
