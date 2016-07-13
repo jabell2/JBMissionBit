@@ -12,7 +12,8 @@ demo.state0 = function(){};
 demo.state0.prototype = {
     
     preload: function(){
-        game.load.spritesheet('square', 'assets/spritesheets/WalkingSquare.png', 94, 76);
+        game.load.spritesheet('square', 'assets/spritesheets/WalkingSquare.png', 100, 300);
+//        game.load.spritesheet('square', 'assets/spritesheets/WalkingSquare.png', 94, 76);
         game.load.spritesheet('ledge', 'assets/spritesheets/ledge.png', 1250, 15);
         
         game.load.spritesheet('obstacle', 'assets/spritesheets/ledge2.png', 100, 60);
@@ -28,8 +29,8 @@ demo.state0.prototype = {
         game.stage.backgroundColor = '#ffffff';
         
 //        Square
-        square = game.add.sprite(0, 480, 'square'); 
-                 
+        square = game.add.sprite(0,0, 'square'); 
+        square.anchor.setTo(.5,.5);
         game.physics.enable(square);
         square.body.gravity.y = 300;
         
@@ -69,12 +70,12 @@ demo.state0.prototype = {
         square.animations.play('walk');
 
 //        What happens when the square reaches the end of your game
-        if (square.x === game.world.width)
-        {
-//            Game Over text?
-//            Next level?
-//            Start over?
-        }
+//        if (square.x === game.world.width)
+//        {
+////            Game Over text?
+////            Next level?
+////            Start over?
+//        }
         
 //        Collision
         game.physics.arcade.collide(obstacles, square);
