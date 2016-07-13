@@ -12,7 +12,7 @@ demo.state0 = function(){};
 demo.state0.prototype = {
     
     preload: function(){
-        game.load.spritesheet('square', 'assets/spritesheets/WalkingSquare.png', 100, 300);
+        game.load.spritesheet('square', 'assets/spritesheets/WalkingSquare.png', 100, 150);
 //        game.load.spritesheet('square', 'assets/spritesheets/WalkingSquare.png', 94, 76);
         game.load.spritesheet('ledge', 'assets/spritesheets/ledge.png', 1250, 15);
         
@@ -62,9 +62,13 @@ demo.state0.prototype = {
 //        Input
         cursors = game.input.keyboard.createCursorKeys();
         this.spacekey = game.input.keyboard.addKey(Phaser.Keyboard.SPACEBAR);
-    },
+
+        },
+
+
     
     update: function(){
+//       game.physics.arcade.collide(o) hitSprite, this
 //        Square movement
         square.body.velocity.x += 1;
         square.animations.play('walk');
@@ -78,7 +82,7 @@ demo.state0.prototype = {
 //        }
         
 //        Collision
-        game.physics.arcade.collide(obstacles, square);
+        this.game.physics.arcade.collide(square, obstacles, this.restartLevel, null, this);
         game.physics.arcade.collide(ledge1, square);
         game.physics.arcade.collide(ledge2, square);
 
@@ -100,7 +104,10 @@ demo.state0.prototype = {
             ledge2.body.checkCollision.up = true;
         }
        
-    }
+    },
     
+    restartLevel: function(){    
+        this.game.state.start(game.state.current);
+    }
 };
 
